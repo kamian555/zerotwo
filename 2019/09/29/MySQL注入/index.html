@@ -55,17 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="1：判断当前数据库的长度利用二分法http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;5 //正常显示 http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;10 //不显示任何数据 http://127.0.0.1/sqli/Less-5/">
+  <meta name="description" content="1：判断当前数据库的长度利用二分法http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;5 //正常显示http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;10 //不显示任何数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL注入">
 <meta property="og:url" content="https://kamian555.github.io/zerotwo/2019/09/29/MySQL注入/index.html">
 <meta property="og:site_name" content="卡面来打的学习记录">
-<meta property="og:description" content="1：判断当前数据库的长度利用二分法http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;5 //正常显示 http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;10 //不显示任何数据 http://127.0.0.1/sqli/Less-5/">
+<meta property="og:description" content="1：判断当前数据库的长度利用二分法http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;5 //正常显示http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;10 //不显示任何数据">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-09-28T14:56:42.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL注入">
-<meta name="twitter:description" content="1：判断当前数据库的长度利用二分法http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;5 //正常显示 http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;10 //不显示任何数据 http://127.0.0.1/sqli/Less-5/">
+<meta name="twitter:description" content="1：判断当前数据库的长度利用二分法http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;5 //正常显示http://127.0.0.1/sqli/Less-5/?id=1&amp;#39; and length(database())&amp;gt;10 //不显示任何数据">
   <link rel="canonical" href="https://kamian555.github.io/zerotwo/2019/09/29/MySQL注入/">
 
 
@@ -272,8 +272,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1：判断当前数据库的长度"><a href="#1：判断当前数据库的长度" class="headerlink" title="1：判断当前数据库的长度"></a>1：判断当前数据库的长度</h2><p>利用二分法<code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;5 //正常显示</code></p>
-<p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;10 //不显示任何数据</code></p>
+        <h2 id="1：判断当前数据库的长度"><a href="#1：判断当前数据库的长度" class="headerlink" title="1：判断当前数据库的长度"></a>1：判断当前数据库的长度</h2><p>利用二分法<code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;5 //正常显示</code></p><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;10 //不显示任何数据</code></p><a id="more"></a>
+
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;7 //正常显示</code></p>
 <p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;8 //不显示任何数据 大于7</code>正常显示，大于8不显示，说明大于7而不大于8，</p>
 <p>所以可知当前数据库长度为 8</p>
