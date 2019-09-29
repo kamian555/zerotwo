@@ -55,28 +55,32 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="卡面来打的学习记录">
-<meta property="og:url" content="https://kamian555.github.io/zerotwo/index.html">
+  <meta name="description" content="nmap这个渗透工具一般用在渗透的准备阶段，用于收集用户的信息，为后面的渗透做情报支持一.nmap的安装和扫描的基本概念首先对于nmap的安装，可以自行百度，当然kali linux是内置了nmap的，只要在命令行下输入nmap即可使用，参数-version可以查看当前nmap的版本然后对于扫描简单的来说其实就是四个动作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nmap使用">
+<meta property="og:url" content="https://kamian555.github.io/zerotwo/2019/09/30/Nmap使用/index.html">
 <meta property="og:site_name" content="卡面来打的学习记录">
+<meta property="og:description" content="nmap这个渗透工具一般用在渗透的准备阶段，用于收集用户的信息，为后面的渗透做情报支持一.nmap的安装和扫描的基本概念首先对于nmap的安装，可以自行百度，当然kali linux是内置了nmap的，只要在命令行下输入nmap即可使用，参数-version可以查看当前nmap的版本然后对于扫描简单的来说其实就是四个动作">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-29T13:35:48.513Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="卡面来打的学习记录">
-  <link rel="canonical" href="https://kamian555.github.io/zerotwo/">
+<meta name="twitter:title" content="Nmap使用">
+<meta name="twitter:description" content="nmap这个渗透工具一般用在渗透的准备阶段，用于收集用户的信息，为后面的渗透做情报支持一.nmap的安装和扫描的基本概念首先对于nmap的安装，可以自行百度，当然kali linux是内置了nmap的，只要在命令行下输入nmap即可使用，参数-version可以查看当前nmap的版本然后对于扫描简单的来说其实就是四个动作">
+  <link rel="canonical" href="https://kamian555.github.io/zerotwo/2019/09/30/Nmap使用/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>卡面来打的学习记录</title>
+  <title>Nmap使用 | 卡面来打的学习记录</title>
   
 
 
@@ -214,12 +218,13 @@
 
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="https://kamian555.github.io/zerotwo/zerotwo/2019/09/30/Nmap使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -232,9 +237,8 @@
       <meta itemprop="name" content="卡面来打的学习记录">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/zerotwo/2019/09/30/Nmap使用/" class="post-title-link" itemprop="url">Nmap使用</a>
+        <h1 class="post-title" itemprop="name headline">Nmap使用
+
           
         </h1>
 
@@ -268,199 +272,88 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p> nmap这个渗透工具一般用在渗透的准备阶段，用于收集用户的信息，为后面的渗透做情报支持</p><h3 id="一-nmap的安装和扫描的基本概念"><a href="#一-nmap的安装和扫描的基本概念" class="headerlink" title="一.nmap的安装和扫描的基本概念"></a>一.nmap的安装和扫描的基本概念</h3><p>首先对于nmap的安装，可以自行百度，当然kali linux是内置了nmap的，只要在命令行下输入nmap即可使用，参数-version可以查看当前nmap的版本然后对于扫描简单的来说其实就是四个动作</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/zerotwo/2019/09/30/Nmap使用/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
+        <p> nmap这个渗透工具一般用在渗透的准备阶段，用于收集用户的信息，为后面的渗透做情报支持</p><h3 id="一-nmap的安装和扫描的基本概念"><a href="#一-nmap的安装和扫描的基本概念" class="headerlink" title="一.nmap的安装和扫描的基本概念"></a>一.nmap的安装和扫描的基本概念</h3><p>首先对于nmap的安装，可以自行百度，当然kali linux是内置了nmap的，只要在命令行下输入nmap即可使用，参数-version可以查看当前nmap的版本然后对于扫描简单的来说其实就是四个动作</p><a id="more"></a>
+
+<p>1.统一沟通语言  （TCP/IP协议）</p>
+<p>2.发出刺激           （ICMP报文头）</p>
+<p>3.受到刺激的反馈  （ICMP的反馈）</p>
+<p>4通过比对刺激和反馈完成扫描</p>
+<h3 id="二-如何找到网络上的设备"><a href="#二-如何找到网络上的设备" class="headerlink" title="二.如何找到网络上的设备"></a>二.如何找到网络上的设备</h3><p>nmap的基本输入：</p>
+<p>将你要扫描的设备地址告诉nmap可以通过下面的方法实现</p>
+<p>统一格式：nmap  [扫描类型]  [设置]  {设备地址}</p>
+<p>其中设备地址（主机名，IP地址，网段等）可以通过以下方法</p>
+<p>1.-iL &lt;文件名&gt;          通过文件输入地址</p>
+<p>2.-iR &lt;IP地址数目&gt;</p>
+<p>3.–exclude <exclude_file> :排出文件中的地址</exclude_file></p>
+<p>4.直接输入IP或网段（最常用）</p>
+<p>上面是nmap两个简单扫描例子，仅反馈了一些简单的信息，但是对于其他的数据收集，nmap里面有详细的参数可以实现，下面将开始讲解一些常用参数的使用：</p>
+<p>扫描参数：</p>
+<p>1.-sL   不做扫描，仅完成DNS解析和网址的转换</p>
+<p>2.-sP    默认发ICMP echo请求和TCP的ACK请求（80端口）       </p>
+<p>3.-PN   不用ping</p>
+<p>4.-Ps    &lt;端口号列表&gt;    发TCP协议SYN标记的空包（80端口）</p>
+<p>5.-PA    &lt;端口号列表&gt;    发TCP协议ACK标记的空包（80端口）   </p>
+<p>6.-PU    &lt;端口号列表&gt;    （31338端口）</p>
+<p>7.-PE -PP -PM</p>
+<p>8.-PO &lt;协议列表&gt;</p>
+<p>9.-PR  （ARP ping）</p>
+<p>设置参数：</p>
+<p>–traceroute<br>-n（不要做DNS解析）<br>-R（DNS解析所有的地址，默认不解析不在线的IP）<br>-system-dns（使用系统DNS）<br>–dns-servers <server1>[,<server2>[,…]](使用其他DNS)</server2></server1></p>
+<h3 id="三-端口扫描概要"><a href="#三-端口扫描概要" class="headerlink" title="三.端口扫描概要"></a>三.端口扫描概要</h3><p>1.端口扫描：</p>
+<p>-p &lt;端口号列表&gt;</p>
+<p>2.端口状态：</p>
+<p>1.Open，端口开启，有程序监听此端口<br>　　2.Closed，端口关闭，数据能到达主机，但是没有程序监听此端口。<br>　　3.Filtered，数据未能到达主机。<br>　　4.Unfiltered，数据能到达主机，但是Nmap无法判断端口开启还是关闭。<br>　　5.Open|filtered，端口没有返回值，主要出现在UDP，IP，FIN，NULL和Xmas扫描 6.Closed|filtered，只出现在IP ID idle 扫描。</p>
+<h3 id="四-端口扫面技术和算法"><a href="#四-端口扫面技术和算法" class="headerlink" title="四.端口扫面技术和算法"></a>四.端口扫面技术和算法</h3><p>1.TCP标志位扫描</p>
+<p> -sS   TCP SYN扫描（匿名扫描，默认不加类型，需要root权限，扫描速度快）</p>
+<p>-sT   TCP全连接扫描（不需要root权限，TCP扫描的默认模式，端口状态和SYN相同,耗时长）</p>
+<p>2.UDP扫描</p>
+<p>-sU      （使用-sUV能增加扫描的准确性）</p>
+<p>没有UDP端口开放</p>
+<p>3.协议扫描</p>
+<p>-sO     获取服务器支持哪些协议</p>
+<p>常用的扫描一般就上面几种</p>
+<h3 id="五-优化nmap的性能"><a href="#五-优化nmap的性能" class="headerlink" title="五.优化nmap的性能"></a>五.优化nmap的性能</h3><p>-F (快速扫描100个常用端口)</p>
+<h3 id="六-服务和应用程序版本的识别"><a href="#六-服务和应用程序版本的识别" class="headerlink" title="六.服务和应用程序版本的识别"></a>六.服务和应用程序版本的识别</h3><p>有时候nmap探测出来的服务和版本信息并不是非常准确，不过我们可以通过加参数的方式使其精确</p>
+<p>1.-sV：探测开放端口的服务和版本信息<br>2.–version-intensity&lt;0-9&gt;：设置探测深度<br>3.–version-light：相当于0-2<br>4.–version-all：相当于0-9<br>5.–version-trace：显示版本扫描详情(用于调试)</p>
+<h3 id="七-远程操作系统的识别"><a href="#七-远程操作系统的识别" class="headerlink" title="七.远程操作系统的识别"></a>七.远程操作系统的识别</h3><p>1.-O：启动操作系统识别。<br>2.–osscan-limit：限定只识别有端口开放的主机，提高-O和-A参数时的扫描速度。<br>3.–osscan-guest<os>：给NMAP建议的操作系统。类似于sqlmap的参数。<br>4.–max-os-tries &lt;次数&gt;：设置重试次数（默认为5），提高准确性或者提高速度。</os></p>
+
     </div>
 
     
     
     
+        
+      
+
       <footer class="post-footer">
-          <div class="post-eof"></div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/zerotwo/2019/09/29/MySQL注入/" rel="next" title="MySQL注入">
+                  <i class="fa fa-chevron-left"></i> MySQL注入
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://kamian555.github.io/zerotwo/zerotwo/2019/09/29/MySQL注入/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/zerotwo/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="卡面来打的学习记录">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/zerotwo/2019/09/29/MySQL注入/" class="post-title-link" itemprop="url">MySQL注入</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-09-28 22:55:02 / Modified: 10:56:42" itemprop="dateCreated datePublished" datetime="2019-09-28T22:55:02-04:00">2019-09-28</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1：判断当前数据库的长度"><a href="#1：判断当前数据库的长度" class="headerlink" title="1：判断当前数据库的长度"></a>1：判断当前数据库的长度</h2><p>利用二分法<code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;5 //正常显示</code></p><p><code>http://127.0.0.1/sqli/Less-5/?id=1&#39; and length(database())&gt;10 //不显示任何数据</code></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/zerotwo/2019/09/29/MySQL注入/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
   </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://kamian555.github.io/zerotwo/zerotwo/2019/09/28/博客搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/zerotwo/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="卡面来打的学习记录">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/zerotwo/2019/09/28/博客搭建/" class="post-title-link" itemprop="url">博客搭建</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-09-27 20:27:27 / Modified: 08:28:30" itemprop="dateCreated datePublished" datetime="2019-09-27T20:27:27-04:00">2019-09-27</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Hexo搭建步骤"><a href="#Hexo搭建步骤" class="headerlink" title="Hexo搭建步骤"></a>Hexo搭建步骤</h2><h4 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1. 安装Git"></a>1. 安装Git</h4><h4 id="2-安装nodejs"><a href="#2-安装nodejs" class="headerlink" title="2. 安装nodejs"></a>2. 安装nodejs</h4><p>安装完后，安全npm</p><p><code>node -v</code></p><p><code>npm -v</code></p><h4 id="3-安装hexo"><a href="#3-安装hexo" class="headerlink" title="3. 安装hexo"></a>3. 安装hexo</h4><p>前面git和nodejs安装好后，就可以安装hexo了，先创建一个文件夹，然后cd到这个文件夹下（或者在这个文件夹下直接右键git bash打开）。</p><p><code>npm install -g hexo-cli</code></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/zerotwo/2019/09/28/博客搭建/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-  </div>
-
-  
 
 
           </div>
@@ -479,6 +372,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -491,6 +389,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-nmap的安装和扫描的基本概念"><span class="nav-number">1.</span> <span class="nav-text">一.nmap的安装和扫描的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-如何找到网络上的设备"><span class="nav-number">2.</span> <span class="nav-text">二.如何找到网络上的设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-端口扫描概要"><span class="nav-number">3.</span> <span class="nav-text">三.端口扫描概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-端口扫面技术和算法"><span class="nav-number">4.</span> <span class="nav-text">四.端口扫面技术和算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-优化nmap的性能"><span class="nav-number">5.</span> <span class="nav-text">五.优化nmap的性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-服务和应用程序版本的识别"><span class="nav-number">6.</span> <span class="nav-text">六.服务和应用程序版本的识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七-远程操作系统的识别"><span class="nav-number">7.</span> <span class="nav-text">七.远程操作系统的识别</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
